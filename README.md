@@ -1,24 +1,40 @@
+# L298N Motor Driver Extension for micro:bit (Speed Control Version)
 
-> Open this page at [https://ikaros-ch.github.io/l298n_makecode/](https://ikaros-ch.github.io/l298n_makecode/)
+Control L298N motor driver with your BBC micro:bit using MakeCode with intuitive speed control (-100 to 100).
 
-## Use as Extension
+## Features
 
-This repository can be added as an **extension** in MakeCode.
+- Simple speed control from -100 (full reverse) to 100 (full forward)
+- Support for two motors or both simultaneously
+- Automatic direction handling based on speed sign
+- Configurable pin assignments
 
-* open [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* click on **New Project**
-* click on **Extensions** under the gearwheel menu
-* search for **https://github.com/ikaros-ch/l298n_makecode** and import
+## Basic Usage
 
-## Edit this project
+1. First configure your pins using the `configure pins` block
+2. Control motors using `set motor speed to %` blocks
+3. Use negative values for reverse direction
+4. Use `stop all motors` to halt all motors
 
-To edit this repository in MakeCode.
+## Example
 
-* open [https://makecode.microbit.org/](https://makecode.microbit.org/)
-* click on **Import** then click on **Import URL**
-* paste **https://github.com/ikaros-ch/l298n_makecode** and click import
+```blocks
+l298n.configurePins(DigitalPin.P0, DigitalPin.P1, DigitalPin.P2, DigitalPin.P8, AnalogPin.P12, AnalogPin.P16)
 
-#### Metadata (used for search, rendering)
+// Forward then backward
+l298n.setMotorSpeed(l298n.Motors.Motor1, 50)
+basic.pause(1000)
+l298n.setMotorSpeed(l298n.Motors.Motor1, -75)
+basic.pause(1000)
+l298n.stopAll()
+```
 
-* for PXT/microbit
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+## Wiring Guide
+
+- Connect IN1 to P0
+- Connect IN2 to P1
+- Connect IN3 to P2
+- Connect IN4 to P8
+- Connect ENA to P12
+- Connect ENB to P16
+- Connect GND to micro:bit GND
