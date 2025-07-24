@@ -29,12 +29,3 @@ basic.pause(1000)
 l298n.stopAll()
 ```
 
-## Wiring Guide
-
-- Connect IN1 to P0
-- Connect IN2 to P1
-- Connect IN3 to P2
-- Connect IN4 to P8
-- Connect ENA to P12
-- Connect ENB to P16
-- Connect GND to micro:bit GND
