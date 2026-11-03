@@ -1,16 +1,17 @@
 {
-    "name": "Untitled",
-    "description": "",
+    "name": "l298n",
+    "version": "1.0.0",
+    "description": "L298N dual H-bridge DC motor driver for micro:bit",
+    "license": "MIT",
     "dependencies": {
-        "core": "*",
-        "radio": "*",
-        "microphone": "*",
-        "microbit-pxt-clicks": "github:bsiever/microbit-pxt-clicks#v0.2.2"
+        "core": "*"
     },
     "files": [
-        "main.blocks",
-        "main.ts",
-        "README.md"
+        "README.md",
+        "l298n.ts",
+        "docs/configure-pins.md",
+        "docs/set-motor-speed.md",
+        "docs/stop-all.md"
     ],
     "testFiles": [
         "test.ts"

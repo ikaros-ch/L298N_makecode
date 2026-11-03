@@ -1,3 +1,7 @@
+/**
+ * L298N dual H-bridge motor driver: two DC motors, speed -100..100.
+ * ST L298 datasheet: https://www.st.com/resource/en/datasheet/l298.pdf
+ */
 //% color=190 weight=100 icon="\uf1b9" block="L298N"
 namespace l298n {
     // Motor selection
@@ -19,7 +23,8 @@ namespace l298n {
     let enB: AnalogPin = AnalogPin.P16
 
     /**
-     * Configure the pins for the L298N motor driver
+     * Choose which micro:bit pins are wired to the L298N. Run once in on start.
+     * Remove the ENA/ENB jumpers on the module so the micro:bit controls speed.
      * @param pinIn1 Direction pin 1 for Motor 1
      * @param pinIn2 Direction pin 2 for Motor 1
      * @param pinIn3 Direction pin 1 for Motor 2
@@ -35,6 +40,7 @@ namespace l298n {
     //% pinIn4.defl=DigitalPin.P8
     //% pinEnA.defl=AnalogPin.P12
     //% pinEnB.defl=AnalogPin.P16
+    //% help=github:l298n/docs/configure-pins
     export function configurePins(
         pinIn1: DigitalPin = DigitalPin.P0,
         pinIn2: DigitalPin = DigitalPin.P1,
@@ -60,12 +66,13 @@ namespace l298n {
     }
 
     /**
-     * Control a motor with speed (-100 to 100)
-     * @param motor Which motor to control
-     * @param speed Motor speed (-100 to 100)
+     * Set a motor's speed. Negative speeds run it backwards, 0 stops it.
+     * @param motor which motor to control
+     * @param speed motor speed from -100 (full reverse) to 100 (full forward), eg: 50
      */
     //% block="set %motor speed to %speed \\%"
     //% speed.min=-100 speed.max=100
+    //% help=github:l298n/docs/set-motor-speed
     export function setMotorSpeed(motor: Motors, speed: number): void {
         // Constrain speed to -100..100 range
         speed = Math.constrain(speed, -100, 100)
@@ -107,9 +114,10 @@ namespace l298n {
     }
 
     /**
-     * Stop all motors
+     * Stop both motors.
      */
     //% block="stop all motors"
+    //% help=github:l298n/docs/stop-all
     export function stopAll(): void {
         pins.digitalWritePin(in1, 0)
         pins.digitalWritePin(in2, 0)
